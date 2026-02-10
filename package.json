@@ -1,0 +1,52 @@
+{
+	"name": "kimi-lm-provider",
+	"displayName": "Kimi Language Model Provider for Copilot",
+	"description": "Registers Kimi (Moonshot AI) models as VS Code language model providers for Copilot Chat",
+	"version": "0.1.0",
+	"publisher": "DenizhanDaklr",
+	"license": "MIT",
+	"repository": "https://github.com/zelosleone/kimi-lm-copilot-provider",
+	"icon": "images/icon.png",
+	"engines": {
+		"vscode": "^1.108.0"
+	},
+	"categories": [
+		"AI",
+		"Chat"
+	],
+	"activationEvents": [],
+	"main": "./out/extension.js",
+	"contributes": {
+		"languageModelChatProviders": [
+			{
+				"vendor": "moonshot",
+				"displayName": "Moonshot",
+				"configuration": {
+					"properties": {
+						"apiKey": {
+							"type": "string",
+							"description": "API key from kimi.com/code/console",
+							"secret": true
+						}
+					}
+				}
+			}
+		],
+		"commands": [
+			{
+				"command": "kimi.testConnection",
+				"title": "Kimi: Test Connection"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"@types/node": "20.19.29",
+		"@types/vscode": "1.108.0",
+		"typescript": "5.9.3"
+	}
+}
