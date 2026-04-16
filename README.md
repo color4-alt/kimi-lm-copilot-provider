@@ -1,6 +1,8 @@
 # Kimi LM Copilot Provider
 
-VS Code language model provider that connects Copilot Chat to Moonshot Kimi. Just enter your API key from `kimi.com/code/console` and start chatting with the model in VS Code Copilot Chat/Agent. 
+VS Code language model provider that connects Copilot Chat to Moonshot Kimi. Just enter your API key from [platform.kimi.com/console](https://platform.kimi.com/console) and start chatting with the model in VS Code Copilot Chat/Agent.
+
+**Update v0.2.0:** Updated to use official Moonshot API endpoints and latest Kimi K2.5 models.
 
 ## If you want to compile yourself
 
@@ -8,13 +10,18 @@ VS Code language model provider that connects Copilot Chat to Moonshot Kimi. Jus
 2. Compile: `npm run compile`
 3. Run npx `vsce package` to create the `.vsix` file.
 4. Load the extension in VS Code.
-5. Configure `apiKey` from `kimi.com/code/console` in the model provider settings.
+5. Configure `apiKey` from [platform.kimi.com/console](https://platform.kimi.com/console) in the model provider settings.
 
 ## API
 
-- Base URL: `https://api.kimi.com/coding/v1`
+- Base URL: `https://api.moonshot.cn/v1` (China) or `https://api.moonshot.ai/v1` (International)
 - Chat endpoint: `/chat/completions`
-- Full endpoint used by the client: `https://api.kimi.com/coding/v1/chat/completions`
+- Full endpoint: `https://api.moonshot.cn/v1/chat/completions`
+
+## Supported Models
+
+- `kimi-k2.5` - Standard model with 256K context, multimodal support
+- `kimi-k2-thinking` - Reasoning model with thinking mode enabled
 
 ## Request Fields
 
@@ -32,22 +39,15 @@ The client sends:
 
 Notes:
 
-- `temperature` is not sent by this extension. I am letting API handle it by itself. Chinese providers are better at handling these stuff by themselves, and I don't want to mess with it.
-- `safety_identifier` is not sent.
+- `temperature` is not sent by this extension.
+- Compatible with OpenAI API format.
 
 ## Default Headers
-
-Currently, Kimi wouldn't accept ANY clients so we need to send extra headers to larp as an accepted client.
 
 Each request includes:
 
 - `Content-Type: application/json`
 - `Authorization: Bearer <apiKey>`
-- `User-Agent: KimiCLI/<version>`
-- `X-Msh-Platform: kimi_cli`
-- `X-Msh-Version: <version>`
-- `X-Msh-Device-Name: <hostname>`
-- `X-Msh-Device-Id: <generated device id>`
 
 ## Streaming and Tools
 

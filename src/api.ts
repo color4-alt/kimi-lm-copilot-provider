@@ -1,20 +1,11 @@
 import type * as vscode from "vscode";
-import { hostname } from "node:os";
-import { randomUUID } from "node:crypto";
 
 const CHAT_ENDPOINT = "/chat/completions";
-const VERSION = "0.1.0";
-const DEVICE_ID = randomUUID().replace(/-/g, "");
 
 function getDefaultHeaders(apiKey: string): Record<string, string> {
 	return {
 		"Content-Type": "application/json",
 		Authorization: `Bearer ${apiKey}`,
-		"User-Agent": `KimiCLI/${VERSION}`,
-		"X-Msh-Platform": "kimi_cli",
-		"X-Msh-Version": VERSION,
-		"X-Msh-Device-Name": hostname() || "unknown",
-		"X-Msh-Device-Id": DEVICE_ID,
 	};
 }
 

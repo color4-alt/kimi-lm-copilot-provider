@@ -1,5 +1,9 @@
 import type * as vscode from "vscode";
 
+// Default base URL for Moonshot API
+// China users: https://api.moonshot.cn/v1
+// International users: https://api.moonshot.ai/v1
+
 interface KimiModelInfo {
 	id: string;
 	name: string;
@@ -18,16 +22,28 @@ interface KimiModelInfo {
 
 export const KIMI_MODELS: KimiModelInfo[] = [
 	{
-		id: "kimi-for-coding",
-		name: "Kimi for Coding",
+		id: "kimi-k2.5",
+		name: "Kimi K2.5",
 		family: "kimi",
-		version: "for-coding",
-		tooltip: "Moonshot AI",
+		version: "k2.5",
+		tooltip: "Moonshot AI - Kimi K2.5 (256K context, multimodal)",
 		maxInputTokens: 262144,
 		maxOutputTokens: 32768,
-		baseUrl: "https://api.kimi.com/coding/v1",
+		baseUrl: "https://api.moonshot.cn/v1",
 		thinking: false,
-		capabilities: { imageInput: false, toolCalling: true },
+		capabilities: { imageInput: true, toolCalling: true },
+	},
+	{
+		id: "kimi-k2-thinking",
+		name: "Kimi K2 Thinking",
+		family: "kimi",
+		version: "k2-thinking",
+		tooltip: "Moonshot AI - Kimi K2 Thinking (Long reasoning mode)",
+		maxInputTokens: 262144,
+		maxOutputTokens: 32768,
+		baseUrl: "https://api.moonshot.cn/v1",
+		thinking: true,
+		capabilities: { imageInput: true, toolCalling: true },
 	},
 ];
 
